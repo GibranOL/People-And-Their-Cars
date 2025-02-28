@@ -3,6 +3,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import express from 'express'
 import { expressMiddleware } from '@apollo/server/express4'
 import http from 'http'
+import cors from 'cors'
 import bodyParser from 'body-parser'
 import { typeDefs, resolvers } from './src/schema'
 
@@ -21,6 +22,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
   app.use(
     '/graphql',
+    cors(),
     bodyParser.json(),
     expressMiddleware(server, {
       context: async ({ req }) => ({ token: req.headers.token })
