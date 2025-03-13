@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { GET_CONTACTS } from '../../graphql/queries'
+import { GET_PEOPLE } from '../../graphql/queries'
 import { List } from 'antd'
-import ContactCard from '../listItems/ContactCard'
+import OwnerCard from '../listItems/OwnerCard'
 
 const getStyles = () => ({
   list: {
@@ -12,17 +12,17 @@ const getStyles = () => ({
 
 const Contacts = () => {
   const styles = getStyles()
-  const { loading, error, data } = useQuery(GET_CONTACTS)
+  const { loading, error, data } = useQuery(GET_PEOPLE)
+
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
 
-  console.log('data', data)
-
+  // data.people ya incluye id, firstName, lastName y cars: [...]
   return (
     <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
-      {data.contacts.map(({ id, firstName, lastName }) => (
-        <List.Item key={id}>
-          <ContactCard id={id} firstName={firstName} lastName={lastName} />
+      {data.people.map(person => (
+        <List.Item key={person.id}>
+          <OwnerCard person={person} />
         </List.Item>
       ))}
     </List>

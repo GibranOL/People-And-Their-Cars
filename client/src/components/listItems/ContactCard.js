@@ -1,51 +1,57 @@
-import Card from 'antd/es/card/Card'
-import UpdateContact from '../forms/UpdateContact'
-import RemoveContact from '../buttons/RemoveContact'
-import { EditOutlined } from '@ant-design/icons'
-import { useState } from 'react'
+import { Card } from 'antd';
+import UpdatePerson from '../forms/UpdatePerson';
+import RemovePerson from '../buttons/RemovePerson';
+import CarCard from './CarCard';
+import { EditOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 
-const ContactCard = props => {
-  const [editMode, setEditMode] = useState(false)
-  const styles = getStyles()
-  const { id, firstName, lastName } = props
+const ContactCard = ({ id, firstName, lastName, cars = [] }) => {
+  const styles = getStyles();
+  const [editMode, setEditMode] = useState(false); // Initialize editMode state
+
+  console.log(`Rendering ContactCard for ${firstName} ${lastName}`, cars); 
 
   const handleButtonClick = () => {
-    setEditMode(!editMode)
-  }
+    setEditMode(!editMode);
+  };
 
   return (
-    <div>
+    <Card
+      title={`${firstName} ${lastName}`} 
+      style={styles.card}
+      actions={[
+        <EditOutlined onClick={handleButtonClick} />,
+        <RemovePerson id={id} />
+      ]}
+    >
       {editMode ? (
-        <UpdateContact
-          id={id}
-          firstName={firstName}
-          lastName={lastName}
-          onButtonClick={handleButtonClick}
-        />
+        <UpdatePerson id={id} firstName={firstName} lastName={lastName} />
       ) : (
-        <Card
-          style={styles.card}
-          actions={[
-            <EditOutlined
-              id={id}
-              firstName={firstName}
-              lastName={lastName}
-              onClick={handleButtonClick}
-            />,
-            <RemoveContact id={id} />
-          ]}
-        >
-          {firstName} {lastName}
-        </Card>
+        cars.length > 0 ? (
+          cars.map(car => (
+            <CarCard
+              key={car.id}
+              id={car.id}
+              year={car.year}
+              make={car.make}
+              model={car.model}
+              price={car.price}
+              owner={{ id, firstName, lastName }}
+            />
+          ))
+        ) : (
+          <p>No cars available</p>
+        )
       )}
-    </div>
-  )
-}
+    </Card>
+  );
+};
 
 const getStyles = () => ({
   card: {
-    width: '500px'
+    width: '600px',
+    marginBottom: '20px'
   }
-})
+});
 
-export default ContactCard
+export default ContactCard;
