@@ -50,7 +50,7 @@ const OwnerCard = ({ person }) => {
   )
 }
 
-// Subcomponente para cada auto dentro del Owner
+// Subcomponent pfor every car owner
 const CarItem = ({ car, ownerId }) => {
   const [editMode, setEditMode] = useState(false)
   const { id, year, make, model, price } = car
@@ -60,7 +60,7 @@ const CarItem = ({ car, ownerId }) => {
   }
 
   if (editMode) {
-    // Si estamos en modo edición, renderizamos el formulario de UpdateCar
+    // if editing we render edition template
     return (
       <UpdateCar
         id={id}
@@ -74,7 +74,7 @@ const CarItem = ({ car, ownerId }) => {
     )
   }
 
-  // Si NO estamos editando, mostramos la info del auto
+  // if not, shows the info car
   return (
     <div style={{ border: '1px solid #eee', margin: '8px 0', padding: '8px' }}>
       <p>

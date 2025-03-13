@@ -1,6 +1,5 @@
 .App {
   align-items: center;
-  border: 4px solid black;
   display: flex;
   flex-direction: column;
   margin: 100px auto;

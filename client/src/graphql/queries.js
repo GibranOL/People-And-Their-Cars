@@ -18,6 +18,23 @@ export const GET_PEOPLE = gql`
   }
 `;
 
+export const GET_PERSON_WITH_CARS = gql`
+  query getPerson($id: String!) {
+    person(id: $id) {
+      id
+      firstName
+      lastName
+      cars {
+        id
+        make
+        model
+        year
+        price
+      }
+    }
+  }
+`
+
 // Obtener todos los autos y sus dueños (ya estaba correcto)
 export const GET_CARS = gql`
   {
