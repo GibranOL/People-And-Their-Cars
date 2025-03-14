@@ -5,6 +5,7 @@ import UpdatePerson from '../forms/UpdatePerson'
 import RemovePerson from '../buttons/RemovePerson'
 import UpdateCar from '../forms/UpdateCar'
 import RemoveCar from '../buttons/RemoveCar'
+import { Link } from 'react-router-dom' 
 
 const OwnerCard = ({ person }) => {
   const styles = getStyles()
@@ -30,6 +31,9 @@ const OwnerCard = ({ person }) => {
         ) : (
           <>
             {firstName} {lastName}{' '}
+            <Link to={`/person/${id}`} style={{ marginLeft: 10 }}>
+              Learn More
+            </Link>
             <EditOutlined
               onClick={handleOwnerEditClick}
               style={{ marginLeft: 10, marginRight: 10 }}
@@ -50,7 +54,6 @@ const OwnerCard = ({ person }) => {
   )
 }
 
-// Subcomponent pfor every car owner
 const CarItem = ({ car, ownerId }) => {
   const [editMode, setEditMode] = useState(false)
   const { id, year, make, model, price } = car
@@ -60,7 +63,6 @@ const CarItem = ({ car, ownerId }) => {
   }
 
   if (editMode) {
-    // if editing we render edition template
     return (
       <UpdateCar
         id={id}
@@ -74,7 +76,6 @@ const CarItem = ({ car, ownerId }) => {
     )
   }
 
-  // if not, shows the info car
   return (
     <div style={{ border: '1px solid #eee', margin: '8px 0', padding: '8px' }}>
       <p>
@@ -91,7 +92,7 @@ const CarItem = ({ car, ownerId }) => {
 
 const getStyles = () => ({
   card: {
-    width: '500px',
+    width: '800px',
     marginBottom: '15px'
   }
 })

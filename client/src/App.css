@@ -2,9 +2,10 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 100px auto;
+  margin: 50px auto; /* Reducimos el margen */
   padding: 40px;
-  width: 70%;
+  width: 90%; /* Antes era 70%, ahora 90% para mayor ancho */
+  max-width: 1200px; /* Limita el ancho máximo para que no se expanda demasiado */
 }
 
 .App-logo {

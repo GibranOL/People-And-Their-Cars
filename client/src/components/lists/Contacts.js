@@ -6,7 +6,13 @@ import OwnerCard from '../listItems/OwnerCard'
 const getStyles = () => ({
   list: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '100%' 
+  },
+  listItem: {
+    display: 'flex',
+    justifyContent: 'center', 
+    width: '100%' 
   }
 })
 
